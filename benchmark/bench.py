@@ -8,6 +8,7 @@ from fastcore.utils import *
 
 # %% ../nbs/01_bench.ipynb 6
 from fastcore.xtras import globtastic
+# temp disable
 #from importlib import import_module
 import sys, os
 from pathlib import Path

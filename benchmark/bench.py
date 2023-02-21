@@ -7,9 +7,9 @@ __all__ = ['get_algs', 'gen', 'plot', 'benchmark', 'main']
 from fastcore.utils import *
 
 # %% ../nbs/01_bench.ipynb 6
-from fastcore.foundation import working_directory
 from fastcore.xtras import globtastic
-import importlib, sys, os
+from importlib import import_module
+import sys, os
 from pathlib import Path
 
 # %% ../nbs/01_bench.ipynb 7
@@ -21,14 +21,6 @@ def get_algs(fldr, filter_file, incl_file='*.py', excl_fldr='excl'):
         alg, _ = fl.split(".")
         algs.append(alg)
     return algs
-
-def _get_moduls(algs, fldr):
-    modul = {}
-    with working_directory(fldr):
-        for alg in algs:
-            modul[alg] = importlib.import_module(alg)
-    return modul
-
 #print(arr)
 
 # %% ../nbs/01_bench.ipynb 8
@@ -36,7 +28,7 @@ def _get_scope(fldr, dist_families, nV):
     *_, alg_type = fldr.split('/')
     algs = get_algs(fldr, filter_file=alg_type)
     sys.path.append(os.path.join(Path.cwd(), os.pardir, alg_type))
-    modul = _get_moduls(algs, fldr)
+    modul = {alg: import_module(alg) for alg in algs}
     #distributions of data that need to be sorted
     fams = [d for d in dist_families if d in ["float","int","normal","lognormal","binomial","exponential","range"]]
     sds = list(range(nV)) #variations for given distribution

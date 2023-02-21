@@ -8,7 +8,7 @@ from fastcore.utils import *
 
 # %% ../nbs/01_bench.ipynb 6
 from fastcore.xtras import globtastic
-from importlib import import_module
+#from importlib import import_module
 import sys, os
 from pathlib import Path
 
@@ -28,7 +28,7 @@ def _get_scope(fldr, dist_families, nV):
     *_, alg_type = fldr.split('/')
     algs = get_algs(fldr, filter_file=alg_type)
     sys.path.append(os.path.join(Path.cwd(), os.pardir, alg_type))
-    modul = {alg: import_module(alg) for alg in algs}
+    modul = {} #{alg: import_module(alg) for alg in algs}
     #distributions of data that need to be sorted
     fams = [d for d in dist_families if d in ["float","int","normal","lognormal","binomial","exponential","range"]]
     sds = list(range(nV)) #variations for given distribution
@@ -71,8 +71,9 @@ def _run_alg(distn, modul, typ, task, **kwargs):
     alg, dat = task.alg, task.dat
     arr = distn.setdefault(dat, gen(dat.fam,dat.sz,dat.sd))
     #modul[alg].sort(arr)
-    algo = getattr(modul[alg], typ)
-    res = algo(arr, **kwargs)
+    if modul:
+        algo = getattr(modul[alg], typ)
+        res = algo(arr, **kwargs)
     #print(res, arr)
 
 # %% ../nbs/01_bench.ipynb 13

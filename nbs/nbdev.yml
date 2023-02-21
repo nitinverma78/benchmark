@@ -1,9 +1,0 @@
-project:
-  output-dir: _docs
-
-website:
-  title: "benchmark"
-  site-url: "https://nitinverma78.github.io/benchmark"
-  description: "Benchmark run-time performance of various sorting and searching algorithms across different data size and distributions on various compute paradigms"
-  repo-branch: main
-  repo-url: "https://github.com/nitinverma78/benchmark"

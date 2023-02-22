@@ -31,7 +31,7 @@ def get_algs(fldr, fltr, incl_file='*.py', excl_fldr='excl'):
 # %% ../nbs/01_bench.ipynb 9
 def _get_scope(fldr, dist_families, nV):
     *_, alg_type = fldr.split('/')
-    algs = get_algs(fldr, filter_file=alg_type)
+    algs = get_algs(fldr, fltr=alg_type)
     sys.path.append(os.path.join(Path.cwd(), os.pardir, alg_type))
     modul = {alg: import_module(alg) for alg in algs}
     #distributions of data that need to be sorted

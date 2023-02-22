@@ -17,15 +17,16 @@ import sys, os
 from pathlib import Path
 
 # %% ../nbs/01_bench.ipynb 8
-def get_algs(fldr, filter_file, incl_file='*.py', excl_fldr='excl'):
-    algs = [] #all sorting algos to be used
-    fps = globtastic(path = fldr, file_glob=incl_file, file_re=filter_file, skip_folder_re=excl_fldr)
+def get_algs(fldr, fltr, incl_file='*.py', excl_fldr='excl'):
+    'list of all algos from `fldr` by scanning files that have `fltr` in their names'
+    algs = []
+    fps = globtastic(path = fldr, file_glob=incl_file, file_re=fltr, skip_folder_re=excl_fldr)
     for fp in fps:
         *fldr, fl = fp.split("/")
         alg, _ = fl.split(".")
         algs.append(alg)
     return algs
-#print(arr)
+
 
 # %% ../nbs/01_bench.ipynb 9
 def _get_scope(fldr, dist_families, nV):
@@ -48,6 +49,7 @@ def gen(fam: str|None=None, # distribution family
         n: int=0, # array of size
         sd: int=0, # random seed
         )->np.ndarray|list: # generate data
+    " generate array of size `'n` using random distribution from `fam` and seed `sd`"
 
     np.random.seed(sd)
 
@@ -107,6 +109,7 @@ import matplotlib.pyplot as plt
 # %% ../nbs/01_bench.ipynb 20
 # plot for given order of magnitude, performance by algorithms and optionally by data distributions
 def plot(sz, runs, algs, fams, typ):
+    """ generate plot for each array of `'sz` using results of `runs` for set of `'algs` of `typ` """
     fig, ax = plt.subplots()
     ax.set_title(f'Benchmark by {typ} alg for data of size {sz}')
     ax.set_ylabel('Run times (ms)')

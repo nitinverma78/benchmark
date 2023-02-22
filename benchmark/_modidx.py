@@ -13,4 +13,6 @@ d = { 'settings': { 'branch': 'main',
                                  'benchmark.bench.gen': ('bench.html#gen', 'benchmark/bench.py'),
                                  'benchmark.bench.get_algs': ('bench.html#get_algs', 'benchmark/bench.py'),
                                  'benchmark.bench.main': ('bench.html#main', 'benchmark/bench.py'),
-                                 'benchmark.bench.plot': ('bench.html#plot', 'benchmark/bench.py')}}}
+                                 'benchmark.bench.plot': ('bench.html#plot', 'benchmark/bench.py')},
+            'benchmark.sort': { 'benchmark.sort._main': ('run_sort.html#_main', 'benchmark/sort.py'),
+                                'benchmark.sort.main': ('run_sort.html#main', 'benchmark/sort.py')}}}

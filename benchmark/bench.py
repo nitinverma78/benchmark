@@ -9,7 +9,7 @@ __all__ = ['get_algs', 'gen', 'plot', 'benchmark', 'main']
 
 # %% ../nbs/01_bench.ipynb 5
 from fastcore.utils import *
-from fastcore.script import *
+
 
 
 # %% ../nbs/01_bench.ipynb 7

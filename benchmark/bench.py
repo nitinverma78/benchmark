@@ -151,9 +151,7 @@ from fastcore.script import *
 #@call_parse
 def main(fldr:str,     # The relative path to folder which contain all algorithms to run
          **kwargs,     # Optional parameters that the algorithm take
-         ):    # wrapper around `benchmark()`
+         )-> None:    # wrapper around `benchmark`
     "Benchmark and plot runtime performance of algorithms stored in `fldr`, and optionally provide additional prameters for the algorithm"
-    #benchmark('../search', target=1)
-    #benchmark('../sort')
     benchmark(fldr, **kwargs)
 

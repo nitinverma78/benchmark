@@ -49,7 +49,7 @@ def gen(fam: str|None=None, # distribution family
         n: int=0, # array of size
         sd: int=0, # random seed
         )->np.ndarray|list: # generate data
-    " generate array of size `'n` using random distribution from `fam` and seed `sd`"
+    " generate array of size `n` using random distribution from `fam` and seed `sd`"
 
     np.random.seed(sd)
 
@@ -109,7 +109,7 @@ import matplotlib.pyplot as plt
 # %% ../nbs/01_bench.ipynb 20
 # plot for given order of magnitude, performance by algorithms and optionally by data distributions
 def plot(sz, runs, algs, fams, typ):
-    """ generate plot for each array of `'sz` using results of `runs` for set of `'algs` of `typ` """
+    """ generate plot for each array of `sz` using results of `runs` for set of `algs` of `typ`   """
     fig, ax = plt.subplots()
     ax.set_title(f'Benchmark by {typ} alg for data of size {sz}')
     ax.set_ylabel('Run times (ms)')
@@ -125,6 +125,9 @@ def plot(sz, runs, algs, fams, typ):
 
 # %% ../nbs/01_bench.ipynb 22
 def benchmark(alg_fldr, data_sizes=[10], dist_families=["float","int","normal","lognormal","binomial","exponential","range"] , num_variations=1, **kwargs):
+    ' run `num_variations` of algorithm typ per `alg_fldr` on sets of `data_sizes` generated using `dist_families` '
+    
+
     typ, algs, modul, fams, sds, szs = *_get_scope(alg_fldr, dist_families, num_variations), data_sizes
     
     Dat = namedtuple('Dat',['fam', 'sz', 'sd'])
@@ -147,7 +150,8 @@ def benchmark(alg_fldr, data_sizes=[10], dist_families=["float","int","normal","
 from fastcore.script import *
 #@call_parse
 def main(fldr:str,     # The relative path to folder which contain all algorithms to run
-         **kwargs):    # Optional parameters that the algorithm take
+         **kwargs,     # Optional parameters that the algorithm take
+         ):    # wrapper around `benchmark()`
     "Benchmark and plot runtime performance of algorithms stored in `fldr`, and optionally provide additional prameters for the algorithm"
     #benchmark('../search', target=1)
     #benchmark('../sort')

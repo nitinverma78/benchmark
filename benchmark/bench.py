@@ -40,8 +40,10 @@ import numpy as np
 from collections import namedtuple
 
 # %% ../nbs/01_bench.ipynb 11
-def gen(fam, n, sd):
-    # generate array of size n, using distribution family fam and random seed sd
+def gen(fam: str|None=None, # distribution family
+        n: int=0, # array of size
+        sd: int=0, # random seed
+        )->np.ndarray|list: # generate data
 
     np.random.seed(sd)
 
@@ -65,7 +67,7 @@ def gen(fam, n, sd):
 
     # exponential (λ)
 
-# %% ../nbs/01_bench.ipynb 12
+# %% ../nbs/01_bench.ipynb 13
 def _run_alg(distn, modul, typ, task, **kwargs):
     #print(distn, modul, typ, task, kwargs)
     alg, dat = task.alg, task.dat
@@ -76,10 +78,10 @@ def _run_alg(distn, modul, typ, task, **kwargs):
         res = algo(arr, **kwargs)
     #print(res, arr)
 
-# %% ../nbs/01_bench.ipynb 13
+# %% ../nbs/01_bench.ipynb 14
 import time
 
-# %% ../nbs/01_bench.ipynb 14
+# %% ../nbs/01_bench.ipynb 15
 def _timeit(method):
     def timed(*args, **kwargs):
         ts = time.time()
@@ -88,17 +90,17 @@ def _timeit(method):
         return  (te - ts) * 1000 / (result if result>0 else 1) #avg time per task in milli seconds
     return timed
 
-# %% ../nbs/01_bench.ipynb 15
+# %% ../nbs/01_bench.ipynb 16
 @_timeit
 def _run(tasks, distn, modul, typ, sub_szs, sub_algs, sub_fams, **kwargs):
     sub_tasks = [task for task in tasks if task.dat.sz in sub_szs and task.alg in sub_algs and task.dat.fam in sub_fams]
     parallel(_run_alg, sub_tasks, distn, modul, typ, **kwargs, threadpool=False, progress=False, n_workers=0) # variations run in parallel depending on #cpu-cores
     return len(sub_tasks)
 
-# %% ../nbs/01_bench.ipynb 17
+# %% ../nbs/01_bench.ipynb 18
 import matplotlib.pyplot as plt
 
-# %% ../nbs/01_bench.ipynb 18
+# %% ../nbs/01_bench.ipynb 19
 # plot for given order of magnitude, performance by algorithms and optionally by data distributions
 def plot(sz, runs, algs, fams, typ):
     fig, ax = plt.subplots()
@@ -114,7 +116,7 @@ def plot(sz, runs, algs, fams, typ):
     fig.tight_layout()
     plt.show()
 
-# %% ../nbs/01_bench.ipynb 20
+# %% ../nbs/01_bench.ipynb 21
 def benchmark(alg_fldr, data_sizes=[10], dist_families=["float","int","normal","lognormal","binomial","exponential","range"] , num_variations=1, **kwargs):
     typ, algs, modul, fams, sds, szs = *_get_scope(alg_fldr, dist_families, num_variations), data_sizes
     
@@ -134,7 +136,7 @@ def benchmark(alg_fldr, data_sizes=[10], dist_families=["float","int","normal","
 
 
 
-# %% ../nbs/01_bench.ipynb 21
+# %% ../nbs/01_bench.ipynb 22
 from fastcore.script import *
 #@call_parse
 def main(fldr:str,     # The relative path to folder which contain all algorithms to run

@@ -3,11 +3,13 @@
 # %% ../nbs/01_bench.ipynb 3
 from __future__ import annotations
 
+
 # %% auto 0
 __all__ = ['get_algs', 'gen', 'plot', 'benchmark', 'main']
 
 # %% ../nbs/01_bench.ipynb 5
 from fastcore.utils import *
+from fastcore.script import *
 
 
 # %% ../nbs/01_bench.ipynb 7
@@ -124,11 +126,11 @@ def plot(sz, runs, algs, fams, typ):
     plt.show()
 
 # %% ../nbs/01_bench.ipynb 22
-def benchmark(alg_fldr, data_sizes=[10], dist_families=["float","int","normal","lognormal","binomial","exponential","range"] , num_variations=1, **kwargs):
-    ' run `num_variations` of algorithm typ per `alg_fldr` on sets of `data_sizes` generated using `dist_families` '
+def benchmark(fldr, data_sizes=[10], dist_families=["float","int","normal","lognormal","binomial","exponential","range"] , num_variations=1, **kwargs):
+    ' run `num_variations` of algorithm typ per `fldr` on sets of `data_sizes` generated using `dist_families` '
     
 
-    typ, algs, modul, fams, sds, szs = *_get_scope(alg_fldr, dist_families, num_variations), data_sizes
+    typ, algs, modul, fams, sds, szs = *_get_scope(fldr, dist_families, num_variations), data_sizes
     
     Dat = namedtuple('Dat',['fam', 'sz', 'sd'])
     dats = [dat:=Dat(fam, sz, sd) for fam in fams for sz in szs for sd in sds]
@@ -146,8 +148,7 @@ def benchmark(alg_fldr, data_sizes=[10], dist_families=["float","int","normal","
 
 
 
-# %% ../nbs/01_bench.ipynb 23
-from fastcore.script import *
+# %% ../nbs/01_bench.ipynb 24
 #@call_parse
 def main(fldr:str,     # The relative path to folder which contain all algorithms to run
          **kwargs,     # Optional parameters that the algorithm take

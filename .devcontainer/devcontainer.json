@@ -33,7 +33,8 @@
         "vscode": {
 			// Set *default* container specific settings.json values on container create.
 			"settings": {
-				"python.defaultInterpreterPath": "/usr/local/bin/python"
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"git.autofetch": true
 			},
             "extensions": [
 				"ms-python.python",

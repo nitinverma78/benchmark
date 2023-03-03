@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "bench.html",
+    "href": "bench.html",
+    "title": "bench",
+    "section": "",
+    "text": "setup\n\nsource\n\nget_algs\n\n get_algs (fldr, fltr, incl_file='*.py', excl_fldr='excl')\n\nlist of all algos from fldr by scanning files that have fltr in their names\n\n\n\nruns\n\nsource\n\ngen\n\n gen (fam:Optional[str]=None, n:int=0, sd:int=0)\n\ngenerate array of size n using random distribution from fam and seed sd\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nfam\nstr | None\nNone\ndistribution family\n\n\nn\nint\n0\narray of size\n\n\nsd\nint\n0\nrandom seed\n\n\nReturns\nnp.ndarray | list\n\ngenerate data\n\n\n\n\ntest_eq(gen(),[])\ntest_eq(gen(n=1),[0])\ntest_eq(gen(n=3),[1,0,-1])\n\n\n\n\nplots\n\nsource\n\nplot\n\n plot (sz, runs, algs, fams, typ)\n\ngenerate plot for each array of sz using results of runs for set of algs of typ\n\n\n\nmain\n\nsource\n\nbenchmark\n\n benchmark (fldr, data_sizes=[10], dist_families=['float', 'int',\n            'normal', 'lognormal', 'binomial', 'exponential', 'range'],\n            num_variations=1, **kwargs)\n\nrun num_variations of algorithm typ per fldr on sets of data_sizes generated using dist_families\n\n\n\ncli\n\nsource\n\nmain\n\n main (fldr:str, **kwargs)\n\nBenchmark and plot runtime performance of algorithms stored in fldr, and optionally provide additional prameters for the algorithm\n\n\n\n\nType\nDetails\n\n\n\n\nfldr\nstr\nThe relative path to folder which contain all algorithms to run\n\n\nkwargs\n\n\n\n\nReturns\nNone\nwrapper around benchmark\n\n\n\n\n\n\nusage\n\nmain('../sort', data_sizes=[10, 1000], dist_families=[\"range\",\"int\"])\nmain('../search', data_sizes=[10, 1000], dist_families=[\"range\",\"int\"])"
+  },
+  {
+    "objectID": "run_sort.html",
+    "href": "run_sort.html",
+    "title": "cli",
+    "section": "",
+    "text": "source\n\nmain\n\n main (data_size:int=10, dist_fam:str='range', num_variations:int=1)\n\nplot run-times for sort algorithms\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\ndata_size\nint\n10\ndata size\n\n\ndist_fam\nstr\nrange\ndata distributions\n\n\nnum_variations\nint\n1\ndata variations\n\n\nReturns\nNone\n\n\n\n\n\n\nmain()\n\n\n\n\n\n\nillustration of cli\n\npython3 -m benchmark.sort --dist_fam \"normal\"\n\nFigure(640x480)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "benchmark",
+    "section": "",
+    "text": "pip install benchmark"
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "benchmark",
+    "section": "How to use",
+    "text": "How to use\nbenchmark sort algorithms in ‘../sort’ folder on arrays of size 10, 1000 with data pulled from range and integer based distributions:\n\nbench.main('../sort', data_sizes=[10, 1000], dist_families=[\"range\",\"int\"])\n\n\n\n\n\n\n\nbenchmark all distributions\n\nbench.main('../sort', data_sizes=[10**3])\n\n\n\n\nbenchmark search algorithms with target=1\n\nbench.main('../search', data_sizes=[10], dist_families=[\"range\",\"int\"], target=1)"
+  }
+]

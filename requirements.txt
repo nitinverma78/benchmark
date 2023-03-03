@@ -2,4 +2,3 @@ fastai::nbdev
 conda-forge::pre-commit
 matplotlib
 numpy
-
